@@ -19,6 +19,15 @@
           <v-list-tile-content>Produto</v-list-tile-content>
           </v-list-tile>
         </router-link>
+
+        <router-link v-bind:to="{name: 'Teste'}" class="side_bar_link">
+          <v-list-tile>
+          <v-list-tile-action>
+            <!-- <v-icon>contact_mail</v-icon> -->
+          </v-list-tile-action>
+          <v-list-tile-content>Teste</v-list-tile-content>
+          </v-list-tile>
+        </router-link>
       </v-list>
     </v-navigation-drawer>
 

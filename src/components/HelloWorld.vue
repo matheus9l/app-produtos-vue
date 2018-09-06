@@ -1,68 +1,24 @@
 <template>
   <v-layout row wrap>
-    <v-flex xs4>
-      <v-card>
-      <v-card-title primary title>
-        <div>
-          <div class="headline">Produto A</div>
-          <span class="grey--text">Data</span>
-        </div>
-      </v-card-title>
-      <v-card-text>Descrição do produto</v-card-text>
-      <v-card-actions>
-        <v-btn flat color="red">Ver informações</v-btn>
-        <v-spacer></v-spacer>
-      </v-card-actions>
-      </v-card>
-    </v-flex>
 
-    <v-flex xs4>
+  <v-flex xs4 v-for="p in cep" :key="p.id">
       <v-card>
-        <v-card-title primary title>
+        <v-card-title primary-title>
           <div>
-            <div class="headline">Produto B</div>
-            <span class="grey--text">Data</span>
+            <div class="headline">
+              <v-btn flat v-bind:to="`/produtos/${p.id}`">
+                {{ p.nome }}
+              </v-btn>
+            </div>
+            <span class="grey--text">{{ p.sigla }}</span>
           </div>
         </v-card-title>
-        <v-card-text>Descrição do produto</v-card-text>
-        <v-card-actions>
-          <v-btn flat color="purple">Ver informações</v-btn>
-          <v-spacer></v-spacer>
-        </v-card-actions>
+        <!-- <v-card-text>
+          <v-btn outline color="indigo" v-bind:to="`/produtos/${p.id}`">{{ p.urlImagem }}</v-btn>
+        </v-card-text> -->
       </v-card>
     </v-flex>
 
-    <v-flex xs4>
-      <v-card>
-      <v-card-title primary title>
-        <div>
-          <div class="headline">Produto C</div>
-          <span class="grey--text">Data</span>
-        </div>
-      </v-card-title>
-      <v-card-text>Descrição do produto</v-card-text>
-      <v-card-actions>
-        <v-btn flat color="red">Ver informações</v-btn>
-        <v-spacer></v-spacer>
-      </v-card-actions>
-      </v-card>
-    </v-flex>
-
-    <v-flex xs4>
-      <v-card>
-        <v-card-title primary title>
-          <div>
-            <div class="headline">Produto D</div>
-            <span class="grey--text">Data</span>
-          </div>
-        </v-card-title>
-        <v-card-text>Descrição do produto</v-card-text>
-        <v-card-actions>
-          <v-btn flat color="purple">Ver informações</v-btn>
-          <v-spacer></v-spacer>
-        </v-card-actions>
-      </v-card>
-    </v-flex>
   </v-layout>
 </template>
 
@@ -73,7 +29,7 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      produtos: []
+      cep: []
     }
   },
   mounted () {
@@ -83,10 +39,11 @@ export default {
     async fetchProdutos () {
       return axios({
         method: 'get',
-        url: 'http://localhost:8080/produtos'
+        url: 'https://servicodados.ibge.gov.br/api/v1/localidades/estados'
       })
         .then((response) => {
-          this.produtos = response.data
+          this.cep = response.data
+          console.log(this.cep)
         })
         .catch(() => {
         })

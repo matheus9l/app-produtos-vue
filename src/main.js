@@ -10,8 +10,8 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-Vue.use(BootstrapVue);
-Vue.use(Vuetify);
+Vue.use(BootstrapVue)
+Vue.use(Vuetify)
 
 Vue.config.productionTip = false
 
